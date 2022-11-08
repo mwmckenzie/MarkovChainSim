@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b13e4a37779954da74309bfed76492, type: 3}
+  m_Name: TransmissionProb_Asymptomatic_Test
+  m_EditorClassIdentifier: 
+  referenceName: 
+  transmissionSlider: 1.041055
+  rate: 1.3291926
+  susceptibility: 1
+  avgCountPerPeriod: 2.14
+  avgPeriod: 1.61

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f39bd2b1cbfdfe47b859c8b1a914f68, type: 3}
+  m_Name: SeirParamRatios_Test01
+  m_EditorClassIdentifier: 
+  _hospToNonHospProportion: {fileID: 11400000, guid: dbdeb81a93482bb47a69b230623223dd, type: 2}
+  _asympToSympProportion: {fileID: 11400000, guid: c4d2d8b886e421143b875b4bdfd1867e, type: 2}
+  _criticalToHospProportion: {fileID: 11400000, guid: 75025ee601d649e458e2498406697b72, type: 2}
+  _deceasedToCriticalRecovProportion: {fileID: 11400000, guid: f33a88cae43e0f74389e1ee90a44d975, type: 2}
