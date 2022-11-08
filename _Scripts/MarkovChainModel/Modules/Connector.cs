@@ -1,45 +1,62 @@
+// Markov Chain Sim -- Connector.cs
+// 
+// Copyright (C) 2022 Matthew W. McKenzie and Kenz LLC
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
 
-namespace MarkovChainModel {
-    public class Connector : MarkovModule, ISensible {
+namespace MarkovChainModel
+{
+    public class Connector : MarkovModule, ISensible
+    {
+        [Title("Connections")] public ISender sender;
+        public IReceiver receiver;
 
-        [Title("Connections")]
-        public ISender  sender;
-        public IReceiver  receiver;
-        
-        [Title("Probabilities")]
-        public float baselineProbability = 1f;
+        [Title("Probabilities")] public float baselineProbability = 1f;
         public float probability = 1f;
 
-        [Title("Clamped Flow")] 
-        public bool clamped = true;
-        
-        [Title("Values")]
-        public float flowMeter;
-        
-        [Title("Probability History")]
-        public List<float> historyProbability;
+        [Title("Clamped Flow")] public bool clamped = true;
 
-        protected override void OnValidate() {
-            
-            if (TrySetSenderFromParent()) {
+        [Title("Values")] public float flowMeter;
+
+        [Title("Probability History")] public List<float> historyProbability;
+
+        protected override void OnValidate()
+        {
+            if (TrySetSenderFromParent())
+            {
                 SetNameFromConnections();
-                var senderModule = (MarkovModule) sender;
+                var senderModule = (MarkovModule)sender;
                 cleanUpBroadcast = senderModule.cleanUpBroadcast;
             }
-            else {
+            else
+            {
                 SetNameIfNothing();
             }
-            
+
             ClampProbabilities();
         }
 
-        private bool TrySetSenderFromParent() {
+        private bool TrySetSenderFromParent()
+        {
             var module = GetComponentInParent<ISender>();
-            if (module is null) {
+            if (module is null)
+            {
                 return false;
             }
 
@@ -47,44 +64,55 @@ namespace MarkovChainModel {
             return true;
         }
 
-        private void SetNameFromConnections() {
-            var senderModule = (MarkovModule) sender;
+        private void SetNameFromConnections()
+        {
+            var senderModule = (MarkovModule)sender;
             var front = senderModule.name;
             var back = "";
-            if (receiver != null) {
-                var receiverModule = (MarkovModule) receiver;
+            if (receiver != null)
+            {
+                var receiverModule = (MarkovModule)receiver;
                 back = receiverModule.name;
             }
+
             name = $"{front}To{back}";
             gameObject.name = name;
         }
-        
-        private void Start() {
+
+        private void Start()
+        {
             cleanUpBroadcast.voidEvent += OnCleanUpBroadcast;
             ResetProbabilities();
-            if (clamped) {
+            if (clamped)
+            {
                 ClampProbabilities();
             }
         }
 
-        private void OnCleanUpBroadcast() {
+        private void OnCleanUpBroadcast()
+        {
             ResetProbabilities();
-            if (clamped) {
+            if (clamped)
+            {
                 ClampProbabilities();
             }
         }
-        
-        private void SetNameIfNothing() {
-            if (name.IsNullOrWhitespace()) {
+
+        private void SetNameIfNothing()
+        {
+            if (name.IsNullOrWhitespace())
+            {
                 name = gameObject.name;
             }
         }
 
-        private void ResetProbabilities() {
+        private void ResetProbabilities()
+        {
             probability = baselineProbability;
         }
-        
-        private void ClampProbabilities() {
+
+        private void ClampProbabilities()
+        {
             baselineProbability = Mathf.Clamp01(baselineProbability);
             probability = Mathf.Clamp01(probability);
         }
@@ -99,32 +127,42 @@ namespace MarkovChainModel {
         //     receiver.Receive(val);
         // }
 
-        public void Transition(float val) {
+        public void Transition(float val)
+        {
             flowMeter = val;
             history.Add(val);
             historyProbability.Add(probability);
-            
-            if (receiver is null) { return; }
-            
+
+            if (receiver is null)
+            {
+                return;
+            }
+
             receiver.Receive(val);
         }
 
-        public void AdjustProbability(float updatedProb, bool adjustBaseline = false) {
-            if (adjustBaseline) {
+        public void AdjustProbability(float updatedProb, bool adjustBaseline = false)
+        {
+            if (adjustBaseline)
+            {
                 baselineProbability = updatedProb;
             }
+
             probability = updatedProb;
         }
 
-        public void RegisterSender(ISender newSender) {
+        public void RegisterSender(ISender newSender)
+        {
             sender = newSender;
         }
 
-        public void RegisterReciever(IReceiver newReceiver) {
+        public void RegisterReciever(IReceiver newReceiver)
+        {
             receiver = newReceiver;
         }
 
-        public float GetReading() {
+        public float GetReading()
+        {
             return flowMeter;
         }
     }
