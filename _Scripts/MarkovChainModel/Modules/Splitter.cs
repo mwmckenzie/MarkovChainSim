@@ -24,11 +24,14 @@ namespace MarkovChainModel
 {
     public class Splitter : MarkovModule, IReceiver, ISender
     {
-        [Title("Flow In")] public List<Connector> connectorsIn;
+        [Title("Flow In")] 
+        public List<Connector> connectorsIn;
 
-        [Title("Split Outflow")] public List<Connector> connectorsOut;
+        [Title("Split Outflow")] 
+        public List<Connector> connectorsOut;
 
-        [Title("Values")] public float pool;
+        [Title("Values")] 
+        public float pool;
         public float incoming;
 
         private void Start()
@@ -37,7 +40,6 @@ namespace MarkovChainModel
             {
                 connector.RegisterSender(this);
             }
-
             RegisterAsReceiver();
         }
 
@@ -53,12 +55,7 @@ namespace MarkovChainModel
         {
             connectorsOut = GetComponentsInChildren<Connector>().ToList();
         }
-
-        private void OnSendSplitsBroadcast()
-        {
-            Send();
-        }
-
+        
         public void Receive(float val)
         {
             pool += val;
@@ -86,7 +83,8 @@ namespace MarkovChainModel
             {
                 if (pool > 0)
                 {
-                    var output = RandomUtils.CalculateTransitionCount(pool, connector.probability);
+                    var output = 
+                        RandomUtils.CalculateTransitionCount(pool, connector.probability);
                     connector.Transition(output);
                     pool -= output;
                 }
@@ -95,7 +93,6 @@ namespace MarkovChainModel
                     connector.Transition(0);
                 }
             }
-
             pool = 0;
         }
     }

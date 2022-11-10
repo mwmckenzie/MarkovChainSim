@@ -24,17 +24,22 @@ namespace MarkovChainModel
 {
     public class Connector : MarkovModule, ISensible
     {
-        [Title("Connections")] public ISender sender;
+        [Title("Connections")] 
+        public ISender sender;
         public IReceiver receiver;
 
-        [Title("Probabilities")] public float baselineProbability = 1f;
+        [Title("Probabilities")] 
+        public float baselineProbability = 1f;
         public float probability = 1f;
 
-        [Title("Clamped Flow")] public bool clamped = true;
+        [Title("Clamped Flow")] 
+        public bool clamped = true;
 
-        [Title("Values")] public float flowMeter;
+        [Title("Values")] 
+        public float flowMeter;
 
-        [Title("Probability History")] public List<float> historyProbability;
+        [Title("Probability History")] 
+        public List<float> historyProbability;
 
         protected override void OnValidate()
         {
@@ -48,7 +53,6 @@ namespace MarkovChainModel
             {
                 SetNameIfNothing();
             }
-
             ClampProbabilities();
         }
 
@@ -59,7 +63,6 @@ namespace MarkovChainModel
             {
                 return false;
             }
-
             sender = module;
             return true;
         }
@@ -74,7 +77,6 @@ namespace MarkovChainModel
                 var receiverModule = (MarkovModule)receiver;
                 back = receiverModule.name;
             }
-
             name = $"{front}To{back}";
             gameObject.name = name;
         }
@@ -137,7 +139,6 @@ namespace MarkovChainModel
             {
                 return;
             }
-
             receiver.Receive(val);
         }
 

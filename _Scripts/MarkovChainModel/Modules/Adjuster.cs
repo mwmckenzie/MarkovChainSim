@@ -22,22 +22,29 @@ namespace MarkovChainModel
 {
     public class Adjuster : MarkovModule, IReceiver
     {
-        [Title("Connector to Adjust")] [HideLabel] [Required]
+        [Required]
+        [Title("Connector to Adjust")] [HideLabel] 
         public Connector adjustableConnector;
-
         public bool adjustBaselineProbability;
-
-        [Title("Signal In")] [HideLabel] [Required]
+        
+        [Required]
+        [Title("Signal In")] [HideLabel] 
         public Connector connectorIn;
+        
+        [Title("Adjustment Type")] [HideLabel] 
+        public AdjustmentType adjustmentType;
 
-        [Title("Adjustment Type")] [HideLabel] public AdjustmentType adjustmentType;
-
-        [Title("Adjustment Function")] [HideLabel, InlineEditor] [Required]
+        [Required]
+        [HideLabel] [InlineEditor] 
+        [Title("Adjustment Function")] 
         public AdjustmentFunction adjustmentFunction;
-
-        [Title("Values")] public float signal;
+        
+        [Title("Values")] 
+        public float signal;
         public float adjustedProbability;
 
+        
+        
         private void Start()
         {
             cleanUpBroadcast.voidEvent += OnCleanUpBroadcast;

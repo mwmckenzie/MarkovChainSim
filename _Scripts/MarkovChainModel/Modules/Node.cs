@@ -23,14 +23,18 @@ namespace MarkovChainModel
 {
     public class Node : MarkovModule, ISensible, ISender, IReceiver, IPumpable
     {
-        [Title("Event Broadcast Channels")] [Required]
+        [Required]
+        [Title("Event Broadcast Channels")] 
         public VoidEventChannelSO sendPoolBroadcast;
 
-        [Title("Inflow")] public List<Connector> connectorsIn;
+        [Title("Inflow")] 
+        public List<Connector> connectorsIn;
 
-        [Title("Outflow")] [HideLabel] public Connector connectorOut;
+        [Title("Outflow")] [HideLabel] 
+        public Connector connectorOut;
 
-        [Title("Values")] public float pool;
+        [Title("Values")] 
+        public float pool;
         public float incoming;
 
         private void Start()
@@ -39,18 +43,19 @@ namespace MarkovChainModel
             cleanUpBroadcast.voidEvent += OnCleanUpBroadcast;
 
             if (connectorOut != null)
-            {
                 connectorOut.RegisterSender(this);
-            }
-
+            
             RegisterAsReceiver();
         }
 
         protected override void OnValidate()
         {
+            base.OnValidate();
+            if (conductor?.sendPoolBroadcast is not null)
+                sendPoolBroadcast ??= conductor.sendPoolBroadcast;
+            
             connectorOut = GetComponentInChildren<Connector>();
             RegisterAsReceiver();
-            base.OnValidate();
         }
 
         private void OnCleanUpBroadcast()

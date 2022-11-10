@@ -23,17 +23,22 @@ namespace MarkovChainModel
 {
     public class Sensor : MarkovModule, ISender
     {
-        [Title("Event Broadcast Channels")] [Required]
+        [Required]
+        [Title("Event Broadcast Channels")] 
         public VoidEventChannelSO takeReadingBroadcast;
 
-        [Required] public VoidEventChannelSO sendReadingBroadcast;
+        [Required] 
+        public VoidEventChannelSO sendReadingBroadcast;
 
-        [Title("Monitored Object")] [HideLabel] [Required]
+        [Required]
+        [Title("Monitored Object")] [HideLabel] 
         public ISensible monitoredObj;
 
-        [Title("Signal(s) Out")] public List<Connector> connectorsOut;
+        [Title("Signal(s) Out")] 
+        public List<Connector> connectorsOut;
 
-        [Title("Values")] public float reading;
+        [Title("Values")] 
+        public float reading;
 
         private void Start()
         {
@@ -47,8 +52,12 @@ namespace MarkovChainModel
 
         protected override void OnValidate()
         {
-            connectorsOut = GetComponentsInChildren<Connector>().ToList();
             base.OnValidate();
+            if (conductor?.takeReadingBroadcast is not null)
+                takeReadingBroadcast ??= conductor.takeReadingBroadcast;
+            if (conductor?.sendReadingBroadcast is not null)
+                sendReadingBroadcast ??= conductor.sendReadingBroadcast;
+            connectorsOut = GetComponentsInChildren<Connector>().ToList();
         }
 
         private void OnSendReadingBroadcast()

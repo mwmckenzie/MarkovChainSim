@@ -21,16 +21,20 @@ namespace MarkovChainModel
 {
     public class Pump : MarkovModule, IReceiver, ISender
     {
-        [Title("Pump Source Node")] [HideLabel] [Required]
+        [Required]
+        [Title("Pump Source Node")] [HideLabel] 
         public IPumpable pumpSource;
 
-        [Title("Signal In")] [HideLabel] [Required]
+        [Required]
+        [Title("Signal In")] [HideLabel] 
         public Connector connectorIn;
 
-        [Title("Pump Outflow")] [HideLabel] [Required]
+        [Required]
+        [Title("Pump Outflow")] [HideLabel] 
         public Connector connectorOut;
 
-        [Title("Values")] public float pool;
+        [Title("Values")] 
+        public float pool;
         public float signal;
 
 

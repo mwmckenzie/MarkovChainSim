@@ -35,7 +35,6 @@ namespace KenzTools
             var json = JsonUtility.ToJson(exportObj, true);
             var filename = $"{fileBaseName}_{fileIterName}_{DateTime.Now.ToString(dateformat)}.json";
             File.WriteAllText($"data/{filename}", json);
-            //File.WriteAllText($"D:/Unity/Projects/CardGameScratchSpace/Assets/data/{filename}", json);
         }
     }
 }

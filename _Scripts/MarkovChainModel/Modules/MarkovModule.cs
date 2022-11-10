@@ -22,28 +22,39 @@ using UnityEngine;
 
 namespace MarkovChainModel
 {
-    public class MarkovModule : SerializedMonoBehaviour
+    public abstract class MarkovModule : SerializedMonoBehaviour
     {
-        [Title("Name"), HideLabel] public new string name;
+        [Title("Name"), HideLabel] 
+        public new string name;
 
-        [Title("Event Broadcast Channels")] [Required]
+        [Required]
+        [Title("Event Broadcast Channels")] 
         public VoidEventChannelSO cleanUpBroadcast;
 
-        [Title("Notes")] [HideLabel, MultiLineProperty(3)]
+        [Title("Notes")] 
+        [HideLabel, MultiLineProperty(3)]
         public string notes = "";
 
         [Title("History")] public List<float> history;
 
-        [HorizontalGroup("ModelExportSplit", 1f), Button("Create Output Connector", ButtonSizes.Large)]
+        [HorizontalGroup("ModelExportSplit", 1f)]
+        [Button("Create Output Connector", ButtonSizes.Large)]
         [GUIColor(.4f, .8f, 1f), PropertyOrder(5)]
         private void CreateOutputConnecterButton()
         {
-            var go = new GameObject("CreatedGameObject");
-            go.transform.parent = this.transform;
+            var go = new GameObject("CreatedGameObject")
+            {
+                transform =
+                {
+                    parent = transform
+                }
+            };
             go.AddComponent<Connector>();
         }
 
-        private void Awake()
+        protected MarkovConductor conductor;
+        
+        protected void Awake()
         {
             SetNameIfNotNothing();
             history = new List<float>();
@@ -52,6 +63,9 @@ namespace MarkovChainModel
         protected virtual void OnValidate()
         {
             SetNameIfNotNothing();
+            conductor ??= GetComponentInParent<MarkovConductor>(true);
+            if (conductor?.cleanUpBroadcast is not null)
+                cleanUpBroadcast ??= conductor.cleanUpBroadcast;
         }
 
         private void SetNameIfNotNothing()

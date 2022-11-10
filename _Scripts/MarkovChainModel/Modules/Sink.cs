@@ -22,9 +22,11 @@ namespace MarkovChainModel
 {
     public class Sink : MarkovModule, IReceiver, ISensible
     {
-        [Title("Inflow")] public List<Connector> connectorsIn;
+        [Title("Inflow")] 
+        public List<Connector> connectorsIn;
 
-        [Title("Values")] public float pool;
+        [Title("Values")] 
+        public float pool;
 
         private float lastValue;
 
@@ -36,8 +38,8 @@ namespace MarkovChainModel
 
         protected override void OnValidate()
         {
-            RegisterAsReceiver();
             base.OnValidate();
+            RegisterAsReceiver();
         }
 
         private void OnCleanUpBroadcast()

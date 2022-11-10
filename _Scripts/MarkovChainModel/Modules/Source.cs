@@ -24,12 +24,15 @@ namespace MarkovChainModel
 {
     public class Source : MarkovModule, ISender, ISensible
     {
-        [Title("Event Broadcast Channels")] [Required]
+        [Required]
+        [Title("Event Broadcast Channels")] 
         public VoidEventChannelSO sendPoolBroadcast;
 
-        [Title("Outflow")] public List<Connector> connectorsOut;
+        [Title("Outflow")] 
+        public List<Connector> connectorsOut;
 
-        [Title("Values")] public float pool;
+        [Title("Values")] 
+        public float pool;
 
 
         private void Start()
@@ -45,16 +48,16 @@ namespace MarkovChainModel
 
         protected override void OnValidate()
         {
-            connectorsOut = GetComponentsInChildren<Connector>().ToList();
             base.OnValidate();
+            if (conductor?.sendPoolBroadcast is not null)
+                sendPoolBroadcast ??= conductor.sendPoolBroadcast;
+            connectorsOut = GetComponentsInChildren<Connector>().ToList();
         }
 
         private void OnCleanUpBroadcast()
         {
-            throw new NotImplementedException();
         }
-
-
+        
         private void OnSendPoolBroadcast()
         {
             Send();
@@ -66,7 +69,6 @@ namespace MarkovChainModel
             {
                 connector.Transition(pool);
             }
-
             history.Add(pool);
         }
 

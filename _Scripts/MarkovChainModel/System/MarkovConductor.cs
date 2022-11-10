@@ -33,7 +33,8 @@ namespace MarkovChainModel
         public VoidEventChannelSO cleanUpBroadcast;
         public VoidEventChannelSO recordDataBroadcast;
 
-        [HorizontalGroup("EventsSplit", .5f), Button("Broadcast Channels", ButtonSizes.Large)]
+        [HorizontalGroup("EventsSplit", .5f)]
+        [Button("Broadcast Channels", ButtonSizes.Large)]
         [GUIColor(.4f, .8f, 1f), PropertyOrder(60)]
         private void BroadcastChannels()
         {
@@ -56,14 +57,16 @@ namespace MarkovChainModel
         private bool isBusy;
         private List<VoidEventChannelSO> _broadcasts;
 
-        [HorizontalGroup("TopSplit", .5f), Button("Run Step", ButtonSizes.Large)]
+        [HorizontalGroup("TopSplit", .5f)]
+        [Button("Run Step (1)", ButtonSizes.Large)]
         [GUIColor(.4f, .8f, 1f), PropertyOrder(60)]
         private void SimFwdButton()
         {
             OrchestrateNextSteps(1);
         }
 
-        [HorizontalGroup("TopSplit", .5f), Button("Run Step", ButtonSizes.Large)]
+        [HorizontalGroup("TopSplit", .5f)]
+        [Button("Run Steps (All)", ButtonSizes.Large)]
         [GUIColor(.4f, .8f, 1f), PropertyOrder(60)]
         private void SimFFwdButton()
         {
@@ -113,11 +116,9 @@ namespace MarkovChainModel
 
                     yield return null;
                 }
-
                 step++;
                 yield return null;
             }
-
             isBusy = false;
         }
     }
