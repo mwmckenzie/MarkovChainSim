@@ -705,8 +705,8 @@ MonoBehaviour:
   connectorsIn:
   - {fileID: 904923325}
   connectorsOut:
-  - {fileID: 768863803}
   - {fileID: 1071911181}
+  - {fileID: 768863803}
   pool: 0
   incoming: 0
 --- !u!1 &904923324
@@ -1151,7 +1151,7 @@ GameObject:
   - component: {fileID: 2089669892}
   - component: {fileID: 2089669893}
   m_Layer: 0
-  m_Name: SourceTo
+  m_Name: SourceToExposed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1201,7 +1201,7 @@ MonoBehaviour:
     - Name: receiver
       Entry: 10
       Data: 1
-  name: SourceTo
+  name: SourceToExposed
   cleanUpBroadcast: {fileID: 11400000, guid: 2cf2931bfccceb6479dd16b742242b8f, type: 2}
   notes: 
   history: []

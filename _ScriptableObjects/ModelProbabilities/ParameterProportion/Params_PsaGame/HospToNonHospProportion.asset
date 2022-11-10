@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: HospToNonHospProportion
   m_EditorClassIdentifier: 
   asRatio: 0
-  asProportion: 0
+  asProportion: 1
   paramA: 
-  valueA: 0
+  valueA: 0.22
   paramB: 
-  valueB: 0
-  per: 0
-  proportion: 0
+  valueB: 99.78
+  per: 100
+  proportion: 0.0022

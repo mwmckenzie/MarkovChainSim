@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b77b0fb2d0ba4134a9cfac84a2f160cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 190a37c427697b547b4b82db23d2f685, type: 3}
   m_Name: AsympToSympProportion
   m_EditorClassIdentifier: 
-  asRatio: 1
-  asProportion: 0
-  paramA: Asymptomatic
-  valueA: 1
-  paramB: Symptomatic
-  valueB: 3
-  per: 4
-  proportion: 0.25
+  asRatio: 0
+  asProportion: 1
+  paramA: 
+  valueA: 83.82
+  paramB: 
+  valueB: 16.18
+  per: 100
+  proportion: 0.8382

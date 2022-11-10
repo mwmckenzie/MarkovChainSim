@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f23942c0f98e424486cfa430786d422e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bbdc4b49a4e40e41b9fdc38e50022fa, type: 3}
   m_Name: VaccinatedToSusceptibleRate
   m_EditorClassIdentifier: 
   conversionName: VaccinatedToSusceptibleRate

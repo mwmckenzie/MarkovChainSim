@@ -29,7 +29,8 @@ namespace MarkovChainModel
         public List<DataAggregator> dataAggregators;
         public List<ProbabilityHistoryAggregator> probabilityHistoryAggregators;
 
-        [HorizontalGroup("ModelExportSplit", .6f), Button("Export Data [JSON]", ButtonSizes.Large)]
+        [HorizontalGroup("ModelExportSplit", .6f)]
+        [Button("Export Data [JSON]", ButtonSizes.Large)]
         [GUIColor(.4f, .8f, 1f), PropertyOrder(5)]
         private void ExportModelDataButton()
         {

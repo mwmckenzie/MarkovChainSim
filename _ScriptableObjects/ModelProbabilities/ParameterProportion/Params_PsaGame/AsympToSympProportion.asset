@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AsympToSympProportion
   m_EditorClassIdentifier: 
   asRatio: 0
-  asProportion: 0
+  asProportion: 1
   paramA: 
-  valueA: 0
+  valueA: 83.82
   paramB: 
-  valueB: 0
-  per: 0
-  proportion: 0
+  valueB: 16.18
+  per: 100
+  proportion: 0.8382

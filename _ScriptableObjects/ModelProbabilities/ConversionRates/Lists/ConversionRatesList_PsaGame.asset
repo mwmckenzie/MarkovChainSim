@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30e231d27883a441a74ec668afa1e74, type: 3}
   m_Name: ConversionRatesList_PsaGame
   m_EditorClassIdentifier: 
-  exposedToInfectiousRate: {fileID: 0}
-  symptomaticRecoveryRate: {fileID: 0}
-  asymptomaticRecoveryRate: {fileID: 0}
-  hospitalizationRecoveryRate: {fileID: 0}
-  criticalRecoveryRate: {fileID: 0}
-  recoveredToSusceptibleRate: {fileID: 0}
-  vaccinatedToSusceptibleRate: {fileID: 0}
+  exposedToInfectiousRate: {fileID: 11400000, guid: 1aed0e780fd6f164eb62886a3c05f8ab, type: 2}
+  symptomaticRecoveryRate: {fileID: 11400000, guid: e6626fcd15e886544aff52c6518ac796, type: 2}
+  asymptomaticRecoveryRate: {fileID: 11400000, guid: 4d961706c5507e04ba9cc6dac08a376f, type: 2}
+  hospitalizationRecoveryRate: {fileID: 11400000, guid: a282b78d4bb503a4da7eacb423cdf199, type: 2}
+  criticalRecoveryRate: {fileID: 11400000, guid: e0ddd4124f193c949ad6c3353e2bc475, type: 2}
+  recoveredToSusceptibleRate: {fileID: 11400000, guid: d24ec2b9c39b79641a9bb756d2c4f012, type: 2}
+  vaccinatedToSusceptibleRate: {fileID: 11400000, guid: 1100c73504c83ad4ebf5755880d6205a, type: 2}

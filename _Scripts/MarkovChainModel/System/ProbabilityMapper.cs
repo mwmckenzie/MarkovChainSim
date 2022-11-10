@@ -29,28 +29,30 @@ namespace MarkovChainModel
 
         [SerializeField] private SeirModelParameters _modelParameters;
 
-        [HorizontalGroup("ParamsExportSplit", .8f), Button("Export Params [JSON]", ButtonSizes.Large)]
+        [HorizontalGroup("ParamsExportSplit", .8f)]
+        [Button("Export Params [JSON]", ButtonSizes.Large)]
         [GUIColor(.4f, .8f, 1f), PropertyOrder(-2), PropertySpace(10, 10)]
         private void ExportParametersButton()
         {
             if (_modelParameters is null)
-            {
                 return;
-            }
-
             FileExportUtils.ExportJson(_modelParameters, "SeirModelParams", referenceName);
         }
 
-        [Title("Conversion Probabilities")] [HideLabel, PropertyOrder(-1)] [SerializeField]
+        [SerializeField]
+        [Title("Conversion Probabilities")] [HideLabel, PropertyOrder(-1)] 
         private ConversionProbabilities _conversionProbs;
 
-        [Title("Parameter Ratios")] [HideLabel, PropertyOrder(-1)] [SerializeField]
+        [SerializeField]
+        [Title("Parameter Ratios")] [HideLabel, PropertyOrder(-1)]
         private SeirParamRatios _paramRatios;
 
-        [Title("Transmission Rates")] [HideLabel, PropertyOrder(-1)] [SerializeField]
+        [SerializeField]
+        [Title("Transmission Rates")] [HideLabel, PropertyOrder(-1)] 
         private TransmissionRates _transmissionRates;
 
-        [HorizontalGroup("ModelRefreshSplit", .8f), Button("Refresh Probabilities", ButtonSizes.Large)]
+        [HorizontalGroup("ModelRefreshSplit", .8f)]
+        [Button("Refresh Probabilities", ButtonSizes.Large)]
         [GUIColor(.4f, .8f, 1f), PropertyOrder(-1), PropertySpace(10, 10)]
         private void RefreshModelProbabilitiesButton()
         {

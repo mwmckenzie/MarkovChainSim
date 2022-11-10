@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DeceasedToCriticalRecovProportion
   m_EditorClassIdentifier: 
   asRatio: 0
-  asProportion: 0
+  asProportion: 1
   paramA: 
-  valueA: 0
+  valueA: 0.00056
   paramB: 
-  valueB: 0
-  per: 0
-  proportion: 0
+  valueB: 99.99944
+  per: 100
+  proportion: 0.0000056
