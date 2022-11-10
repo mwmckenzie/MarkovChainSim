@@ -1,5 +1,29 @@
 # MarkovChainSim
 
+## Installation
+
+ - Create New Empty Unity Project (Any Template, Recommended Version 2021.X LTS)
+ - Delete Any Contents in Assets Folder
+ - Download and Unzip MarkovChainSim Repo within Empty Asset Folder
+ - Install Unity Mathematics Plugin
+ 
+## Dependencies
+ 
+### Without Any Additional Asset Installations
+
+ - The Simulation Will Run 
+ - All Parameters Are Editable
+ - Parameters and Simulation Results Are Fully Exportable From the Editor UI
+ - New Models Can be Generated at Runtime via APIs
+ 
+### Additional Assets Required for Building and Modifying Models in the Editor 
+
+ - Two Common Unity Assets are Required for Full Editor Functionality 
+ - Asset: Odin Serializer
+ - Asset: Odin Validator
+
+## Additional Information
+
 Copyright (C) 2022 Matthew W. McKenzie and Kenz LLC
 
 This program is free software: you can redistribute it and/or modify
