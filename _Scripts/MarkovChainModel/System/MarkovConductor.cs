@@ -24,17 +24,15 @@ namespace MarkovChainModel
 {
     public class MarkovConductor : SerializedMonoBehaviour
     {
+        [Title("Simulation Broadcast Channels")]
         public VoidEventChannelSO takeReadingBroadcast;
         public VoidEventChannelSO sendReadingBroadcast;
-
         public VoidEventChannelSO sendPoolBroadcast;
-        //public VoidEventChannelSO sendSplitsBroadcast;
-
         public VoidEventChannelSO cleanUpBroadcast;
         public VoidEventChannelSO recordDataBroadcast;
 
         [HorizontalGroup("EventsSplit", .5f)]
-        [Button("Broadcast Channels", ButtonSizes.Large)]
+        //[Button("Broadcast Channels", ButtonSizes.Large)]
         [GUIColor(.4f, .8f, 1f), PropertyOrder(60)]
         private void BroadcastChannels()
         {
@@ -42,7 +40,6 @@ namespace MarkovChainModel
             {
                 return;
             }
-
             var modules = FindObjectsOfType<MarkovModule>();
             foreach (var module in modules)
             {
@@ -50,8 +47,11 @@ namespace MarkovChainModel
             }
         }
 
-        [SerializeField] private int _stepsPerSimFFwd = 30;
-        [ShowInInspector] public int step;
+        [Title("Simulation Controls [Run Mode]")]
+        [SerializeField] 
+        private int _stepsPerSimFFwd = 30;
+        [ShowInInspector] 
+        public int step;
 
         private int _requestedStep;
         private bool isBusy;
@@ -66,7 +66,7 @@ namespace MarkovChainModel
         }
 
         [HorizontalGroup("TopSplit", .5f)]
-        [Button("Run Steps (All)", ButtonSizes.Large)]
+        [Button("Run Steps (FFWD)", ButtonSizes.Large)]
         [GUIColor(.4f, .8f, 1f), PropertyOrder(60)]
         private void SimFFwdButton()
         {
@@ -75,6 +75,7 @@ namespace MarkovChainModel
 
         private void Awake()
         {
+            cleanUpBroadcast.voidEvent += OnCleanUpBroadcast;
             _broadcasts = new List<VoidEventChannelSO>()
             {
                 takeReadingBroadcast,
@@ -85,29 +86,24 @@ namespace MarkovChainModel
             };
         }
 
-        public void OrchestrateNextSteps(int steps)
+        private void OnCleanUpBroadcast()
         {
-            // takeReadingBroadcast.RaiseEvent();
-            // sendReadingBroadcast.RaiseEvent();
-            // sendPoolBroadcast.RaiseEvent();
-            // //sendSplitsBroadcast.RaiseEvent();
-            // cleanUpBroadcast.RaiseEvent();
-            // recordDataBroadcast.RaiseEvent();
+            step++;
+        }
 
+        public void OrchestrateNextSteps(int reqNumSteps)
+        {
             if (isBusy)
             {
                 return;
             }
-
-            _requestedStep += steps;
-
+            _requestedStep =  step + reqNumSteps;
             StartCoroutine(BroadcastSequence());
         }
 
         private IEnumerator BroadcastSequence()
         {
             isBusy = true;
-
             while (step < _requestedStep)
             {
                 foreach (var broadcast in _broadcasts)
@@ -116,7 +112,7 @@ namespace MarkovChainModel
 
                     yield return null;
                 }
-                step++;
+                //step++;
                 yield return null;
             }
             isBusy = false;

@@ -63,7 +63,7 @@ namespace MarkovChainModel
         {
             foreach (var connector in connectorsIn)
             {
-                connector.RegisterReciever(this);
+                connector.RegisterReceiver(this);
             }
         }
 

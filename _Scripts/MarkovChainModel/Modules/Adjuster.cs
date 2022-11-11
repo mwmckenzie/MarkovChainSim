@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 using System;
+using MarkovChainModel.Enums;
 using Sirenix.OdinInspector;
 
 namespace MarkovChainModel
@@ -42,8 +43,6 @@ namespace MarkovChainModel
         [Title("Values")] 
         public float signal;
         public float adjustedProbability;
-
-        
         
         private void Start()
         {
@@ -87,17 +86,10 @@ namespace MarkovChainModel
                     {
                         adjustedProbability = priorProb / adjustedProbability;
                     }
-
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            // adjustableConnector.probability = adjustedProbability;
-            // if (adjustBaselineProbability) {
-            //     adjustableConnector.baselineProbability = adjustedProbability;
-            // }
-
             adjustableConnector.AdjustProbability(adjustedProbability, adjustBaselineProbability);
         }
 
@@ -108,15 +100,7 @@ namespace MarkovChainModel
 
         public void RegisterAsReceiver()
         {
-            connectorIn.RegisterReciever(this);
+            connectorIn.RegisterReceiver(this);
         }
-    }
-
-    public enum AdjustmentType
-    {
-        Replace,
-        Sum,
-        Multiply,
-        Divide
     }
 }

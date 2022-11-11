@@ -15,9 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-// todo: Rewrite for longevity in own coding style/format (keeping reference above)
-
-
 using UnityEngine;
 using static Unity.Mathematics.math;
 using static UnityEngine.Mathf;
@@ -29,12 +26,12 @@ namespace KenzTools
         private float _xPrior;
         private float _y;
         private float _yDelta;
-        private float _w;
-        private float _z;
-        private float _d;
-        private float _k1;
-        private float _k2;
-        private float _k3;
+        private readonly float _w;
+        private readonly float _z;
+        private readonly float _d;
+        private readonly float _k1;
+        private readonly float _k2;
+        private readonly float _k3;
 
         public SecondOrderDynamicsFloat(float f, float z, float r, float x0)
         {
@@ -59,7 +56,7 @@ namespace KenzTools
                 _xPrior = x;
             }
 
-            var k1_stable = _k1;
+            var k1Stable = _k1;
             var k2Stable =
                 Max(_k2, (timeStep * timeStep / 2f) + (timeStep * _k1 / 2f), timeStep * _k1);
 
@@ -71,7 +68,7 @@ namespace KenzTools
 
                 var beta = t1 * t1;
                 var t2 = timeStep / (1f + beta - alpha);
-                k1_stable = (1f - beta) * t2;
+                k1Stable = (1f - beta) * t2;
                 k2Stable = timeStep * t2;
             }
 

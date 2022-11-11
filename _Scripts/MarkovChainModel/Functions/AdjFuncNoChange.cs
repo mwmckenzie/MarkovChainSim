@@ -19,10 +19,10 @@ namespace MarkovChainModel
 {
     public class AdjFuncNoChange : AdjustmentFunction
     {
-        public override float Adjust(float observation)
+        public override float Adjust(float obsIn)
         {
-            history.Add(observation);
-            return observation;
+            history.Add(obsIn);
+            return obsIn;
         }
     }
 }

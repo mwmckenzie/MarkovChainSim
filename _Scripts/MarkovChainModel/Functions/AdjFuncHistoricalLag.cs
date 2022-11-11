@@ -20,50 +20,56 @@ using System.Collections.Generic;
 using KenzTools;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MarkovChainModel
 {
     [Serializable]
     public class AdjFuncHistoricalLag : AdjustmentFunction
     {
-        [Title("Config Settings")] [InlineEditor] [SerializeField]
-        private AdjFuncConfig _config;
+        [FormerlySerializedAs("_config")]
+        [Title("Config Settings")]
+        [SerializeField] [InlineEditor] 
+        private AdjFuncConfig config;
 
-        [InlineEditor] [SerializeField] private SecondOrderFunctionConfig _dynamicsConfig;
+        [FormerlySerializedAs("_dynamicsConfig")]
+        [InlineEditor] 
+        [SerializeField] 
+        private SecondOrderFunctionConfig dynamicsConfig;
 
-        [Title("Debug Lists")] public List<float> obsHistory;
+        [Title("Debug Lists")] 
+        public List<float> obsHistory;
         public List<float> dynamicValHistory;
 
         private SecondOrderDynamicsFloat _dynamics;
 
         public override void ResetHistory()
         {
-            _config.remappedValue = 0f;
+            config.remappedValue = 0f;
 
             obsHistory = new List<float>();
             dynamicValHistory = new List<float>();
             base.ResetHistory();
         }
 
-        public override float Adjust(float observation)
+        public override float Adjust(float obsIn)
         {
-            if (_dynamics == null)
-            {
-                _dynamics = new SecondOrderDynamicsFloat(
-                    _dynamicsConfig.freq, _dynamicsConfig.damp, _dynamicsConfig.response, _currVal);
-            }
+            _dynamics ??= new SecondOrderDynamicsFloat(
+                dynamicsConfig.freq, dynamicsConfig.damp, dynamicsConfig.response, currVal);
 
-            _currVal = _dynamics.Update(stepDuration, observation);
+            currVal = _dynamics.Update(stepDuration, obsIn);
 
-            var alpha = Mathf.InverseLerp(_config.expectedObsRange.x, _config.expectedObsRange.y, _currVal);
-            _config.remappedValue = Mathf.Lerp(_config.remapRange.x, _config.remapRange.y, alpha);
+            var alpha = Mathf.InverseLerp(config.expectedObsRange.x, 
+                config.expectedObsRange.y, currVal);
+            
+            config.remappedValue = Mathf.Lerp(config.remapRange.x, config.remapRange.y, alpha);
 
-            history.Add(_config.remappedValue);
+            history.Add(config.remappedValue);
 
-            obsHistory.Add(observation);
-            dynamicValHistory.Add(_currVal);
+            obsHistory.Add(obsIn);
+            dynamicValHistory.Add(currVal);
 
-            return _config.remappedValue;
+            return config.remappedValue;
         }
     }
 }

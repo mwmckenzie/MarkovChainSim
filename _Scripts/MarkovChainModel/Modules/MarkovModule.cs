@@ -33,16 +33,16 @@ namespace MarkovChainModel
 
         [Title("Notes")] 
         [HideLabel, MultiLineProperty(3)]
-        public string notes = "";
+        public string notes = string.Empty;
 
         [Title("History")] public List<float> history;
 
         [HorizontalGroup("ModelExportSplit", 1f)]
         [Button("Create Output Connector", ButtonSizes.Large)]
         [GUIColor(.4f, .8f, 1f), PropertyOrder(5)]
-        private void CreateOutputConnecterButton()
+        private void CreateOutputConnectorButton()
         {
-            var go = new GameObject("CreatedGameObject")
+            var go = new GameObject("OutputConnector")
             {
                 transform =
                 {

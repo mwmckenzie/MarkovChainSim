@@ -70,14 +70,14 @@ namespace MarkovChainModel
         private void SetNameFromConnections()
         {
             var senderModule = (MarkovModule)sender;
-            var front = senderModule.name;
-            var back = "";
+            var senderModuleName = senderModule.name;
+            var receiverModuleName = string.Empty;
             if (receiver != null)
             {
                 var receiverModule = (MarkovModule)receiver;
-                back = receiverModule.name;
+                receiverModuleName = receiverModule.name;
             }
-            name = $"{front}To{back}";
+            name = $"{senderModuleName}To{receiverModuleName}";
             gameObject.name = name;
         }
 
@@ -118,17 +118,7 @@ namespace MarkovChainModel
             baselineProbability = Mathf.Clamp01(baselineProbability);
             probability = Mathf.Clamp01(probability);
         }
-
-        // public void Transition(int val) {
-        //     flowMeter = val;
-        //     history.Add(val);
-        //     historyProbability.Add(probability);
-        //     
-        //     if (receiver is null) { return; }
-        //     
-        //     receiver.Receive(val);
-        // }
-
+        
         public void Transition(float val)
         {
             flowMeter = val;
@@ -157,7 +147,7 @@ namespace MarkovChainModel
             sender = newSender;
         }
 
-        public void RegisterReciever(IReceiver newReceiver)
+        public void RegisterReceiver(IReceiver newReceiver)
         {
             receiver = newReceiver;
         }

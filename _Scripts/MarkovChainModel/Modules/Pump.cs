@@ -66,7 +66,7 @@ namespace MarkovChainModel
 
         public void RegisterAsReceiver()
         {
-            connectorIn.RegisterReciever(this);
+            connectorIn.RegisterReceiver(this);
         }
 
         public void PumpFromSource()
