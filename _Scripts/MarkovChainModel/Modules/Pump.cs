@@ -48,9 +48,9 @@ namespace MarkovChainModel
 
         protected override void OnValidate()
         {
+            base.OnValidate();
             connectorOut = GetComponentInChildren<Connector>();
             RegisterAsReceiver();
-            base.OnValidate();
         }
 
         private void OnCleanUpBroadcast()

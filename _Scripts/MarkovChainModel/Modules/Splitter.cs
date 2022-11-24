@@ -45,10 +45,10 @@ namespace MarkovChainModel
 
         protected override void OnValidate()
         {
+            base.OnValidate();
             RegisterAsReceiver();
             UpdateOutputsFromChildren();
             OrderOutputsByProbability();
-            base.OnValidate();
         }
 
         private void UpdateOutputsFromChildren()
@@ -73,12 +73,32 @@ namespace MarkovChainModel
         private void OrderOutputsByProbability()
         {
             connectorsOut = connectorsOut.OrderBy(x => x.probability).ToList();
+            
+            switch (connectorsOut.Count)
+            {
+                case 0:
+                    return;
+                case 1:
+                    return;
+                case 2:
+                    if (connectorsOut[1].probability >= 1)
+                    {
+                        return;
+                    }
+                    break;
+            }
+            
+            for (var i = 1; i < connectorsOut.Count - 1; i++)
+            {
+                var lesserProb = connectorsOut[i - 1].probability;
+                connectorsOut[i].probability = connectorsOut[i].baselineProbability * 1f / (1f - lesserProb);
+            }
         }
 
         public void Send()
         {
             OrderOutputsByProbability();
-
+            
             foreach (var connector in connectorsOut)
             {
                 if (pool > 0)

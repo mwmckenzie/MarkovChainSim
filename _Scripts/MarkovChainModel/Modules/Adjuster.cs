@@ -53,8 +53,8 @@ namespace MarkovChainModel
 
         protected override void OnValidate()
         {
-            RegisterAsReceiver();
             base.OnValidate();
+            RegisterAsReceiver();
         }
 
         private void OnCleanUpBroadcast()
@@ -100,7 +100,7 @@ namespace MarkovChainModel
 
         public void RegisterAsReceiver()
         {
-            connectorIn.RegisterReceiver(this);
+            connectorIn?.RegisterReceiver(this);
         }
     }
 }

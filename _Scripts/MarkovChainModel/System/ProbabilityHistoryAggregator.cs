@@ -41,6 +41,14 @@ namespace MarkovChainModel
 
         [Title("Data Collection")] [HideLabel] public RecordedDataCollection dataCollection;
 
+        private MarkovConductor _conductor;
+        
+        private void OnValidate()
+        {
+            _conductor ??= GetComponentInParent<MarkovConductor>(true);
+            if (_conductor?.recordDataBroadcast is not null)
+                recordDataBroadcast ??= _conductor.recordDataBroadcast;
+        }
 
         private void Start()
         {
